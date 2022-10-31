@@ -3,19 +3,20 @@ import requests
 # Connection
 HOST = '127.0.0.1'
 PORT = '9797'
-
-# Operations
-
-EXEC = 'sh5exec'  # выполнить процедуру
-
 USER_NAME = 'Admin'
 USER_PASS = ''
+
+# Operations
+EXEC = 'sh5exec'  # выполнить процедуру
+
 
 # STOREHOUSE 5 REPLICATION PROCEDURES -------------------------------------------------------------- #
 
 
-# send sh5 api request
 def api_request(host, port, operation, proc):
+    
+    """ Send sh5 api request """
+    
     request = requests.post(url=f'http://{host}:{port}/api/{operation}', json=proc)
     request.raise_for_status()
     data = request.json()
@@ -23,9 +24,10 @@ def api_request(host, port, operation, proc):
     return data
 
 
-# convert num string to guid
 def num_to_guid(num: str):
+    
     """ Convert any number to guid """
+    
     zero_add = ''
     guid_mask = '{00000000-0000-0000-0000-'
     postfix = '}'
